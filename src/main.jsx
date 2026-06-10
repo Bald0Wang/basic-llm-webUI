@@ -16,6 +16,9 @@ import {
   SquareMenu,
 } from 'lucide-react'
 import './styles.css'
+import CodeBuddyPage from './CodeBuddyPage'
+import SeriesPage from './SeriesPage'
+import SeriesSwitcher from './SeriesSwitcher'
 
 const seedThreads = [
   '世界杯观赛日历生成',
@@ -258,4 +261,11 @@ function App() {
   )
 }
 
-createRoot(document.getElementById('root')).render(<App />)
+const path = window.location.pathname.replace(/\/+$/, '') || '/'
+const page = path === '/codebuddy-work'
+  ? <><CodeBuddyPage /><SeriesSwitcher /></>
+  : path === '/vaka'
+    ? <><App /><SeriesSwitcher /></>
+    : <SeriesPage />
+
+createRoot(document.getElementById('root')).render(page)
